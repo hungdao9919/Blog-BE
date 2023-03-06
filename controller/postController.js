@@ -63,7 +63,37 @@ const handleDeletePost = async (req, res) => {
 
 const handleUpdatePost = async (req, res) => {
      //check role, nếu là admin thì hiện all posts, user thì hiện post by user id
-    console.log('update postssss')
+    const { postID,title,postcontent } = req.body;
+    if(!postID) return res.status(400).json({ "message": 'POST ID is required' });
+    if(!req.roles) return res.sendStatus(401);
+    const foundUser = await user.findOne({"username":req.username});
+    const foundPost = await post.findOne({"_id":postID})
+
+ 
+    if(!foundPost) return res.status(409).json({"message": `Can not find post with ID: ${postID}`})
+    if(req.roles.Admin){
+         foundPost.title = title;   
+         foundPost.postcontent = postcontent;
+         foundPost.datemodify = new Date().toLocaleString("vi-VN")
+         foundPost.save();
+         return res.status(204).json(foundPost)
+    }
+
+    else{
+          
+        if(foundPost.userid===foundUser._id.toString()){
+            foundPost.title = title;   
+            foundPost.postcontent = postcontent;
+            foundPost.datemodify = new Date().toLocaleString("vi-VN")
+            foundPost.save();
+            return res.status(204).json(foundPost)
+        }
+        else{
+            return res.sendStatus(401)
+        }
+       
+       
+    }
 
      
 };
