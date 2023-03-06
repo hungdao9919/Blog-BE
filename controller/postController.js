@@ -1,5 +1,6 @@
 const post = require('../model/post');
 const user = require('../model/user');
+var mongoose = require('mongoose');
 
 require('dotenv').config();
 
@@ -9,12 +10,12 @@ const handleCreateNewPost = async (req, res) => {
     const { title, postcontent } = req.body;
     const foundUser = await user.findOne({"username":req.username});
      
-    if(!title || !postcontent) return res.status(400).json({ message: 'Title and postcontent are required' });
+    if(!title || !postcontent) return res.status(400).json({ "message": 'Title and postcontent are required' });
     const result = await post.create({"title":title,"postcontent":postcontent,userid:foundUser._id});
     res.status(201).json(result)
 };
 const handleGetPost = async (req, res) => {
-    console.log(req.roles)
+    
     if(!req.roles) return res.sendStatus(401);
     const foundUser = await user.findOne({"username":req.username});
     if(foundUser.roles.Admin){
@@ -25,21 +26,38 @@ const handleGetPost = async (req, res) => {
         const postOfUser = await post.find({"userid":foundUser._id})
         res.status(200).json(postOfUser)
 
-    }
-     
-
-    
-
-
-     //check role, nếu là admin thì get all posts, user thì get post by user id
-    //  const { title, postcontent } = req.body;
-    // const foundUser = await user.findOne({"username":req.username});
-    // if(req.roles)
+    } 
 };
 const handleDeletePost = async (req, res) => {
-    console.log('delete postssss')
+    //trường hợp usuer có roles là admin thì cho xóa luôn, còn user có role chỉ là user thì check user id của post đó có bằng user id của user reqeust ko 
+    // check id post có nằm trong list post của user ko?
+    const { postID } = req.body;
+    if(!postID) return res.status(400).json({ "message": 'POST ID is required' });
 
-     //check role, nếu là admin thì hiện all posts, user thì hiện post by user id
+    if(!req.roles) return res.sendStatus(401);
+    const foundUser = await user.findOne({"username":req.username});
+    const foundPost = await post.findOne({"_id":postID})
+
+ 
+    if(!foundPost) return res.status(409).json({"message": `Can not find post with ID: ${postID}`})
+    if(req.roles.Admin){
+        const result = await post.deleteOne({"_id":postID});
+         return res.status(204).json(result)
+    }
+
+    else{
+          
+        if(foundPost.userid===foundUser._id.toString()){
+            const result = await post.deleteOne({"_id":postID}).exec();
+            return res.status(204).json(result)
+        }
+        else{
+            return res.sendStatus(401)
+        }
+       
+       
+    }
+    
 };
 
 

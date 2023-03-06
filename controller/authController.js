@@ -16,7 +16,7 @@ const handleLogin = async (req, res) => {
         {
             "userInfo": {
                 "username": username,
-                "roles": { User: 2001 },
+                "roles": foundUser.roles,
             },
         },process.env.ACCESS_TOKEN_SECRET,
         {expiresIn:'20s'}
