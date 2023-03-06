@@ -19,7 +19,7 @@ const handleCreateNewUser = async (req, res) => {
             },
         },
         process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn : '20m'},
+        {expiresIn : '20s'},
     );
   
     const refreshToken = jwt.sign(
