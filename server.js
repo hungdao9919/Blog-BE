@@ -20,9 +20,12 @@ app.use('/', require('./route/root'));
 app.use('/register', require('./route/api/register'));
 app.use('/login', require('./route/api/auth'));
 app.use('/refresh', require('./route/api/refresh'));
+app.use('/public-posts', require('./route/api/publicPosts'));
+app.use('/public-comments', require('./route/api/publicComment'));
 
 app.use('/',require('./middleware/verifyJWT'))
 app.use('/post', require('./route/api/post'));
+app.use('/comment', require('./route/api/comment'));
  
 
 app.use('*', (req, res) => {

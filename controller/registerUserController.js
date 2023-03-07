@@ -6,7 +6,7 @@ require('dotenv').config();
  
 
 const handleCreateNewUser = async (req, res) => {
-    const { username, password, email, lastname, firstname } = req.body;
+    const { username, password, email, lastname, firstname, profileImage } = req.body;
     if (!username || !password) return res.status(400).json({ message: 'Username and password are required' });
     const duplicatedUsername = await user.findOne({ username: username }).exec();
     if (duplicatedUsername) return res.status(409).json({ message: 'Username was existed' });
@@ -37,6 +37,7 @@ const handleCreateNewUser = async (req, res) => {
             "email": email,
             "lastname": lastname,
             "firstname": firstname, 
+            "profileImage":profileImage
         });
     
      
