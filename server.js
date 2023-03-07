@@ -25,6 +25,8 @@ app.use('/public-posts', require('./route/api/publicPosts'));
 app.use('/public-comments', require('./route/api/publicComment'));
 
 app.use('/',require('./middleware/verifyJWT'))
+app.use('/admin-comment', require('./route/adminApi/commentsAdmin'));
+app.use('/admin-post', require('./route/adminApi/postsAdmin'));
 app.use('/user', require('./route/api/user'));
 app.use('/post', require('./route/api/post'));
 app.use('/comment', require('./route/api/comment'));
