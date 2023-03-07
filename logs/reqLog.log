@@ -814,3 +814,6 @@
 2023/03/07	23:23:06	3bbace85-0bd2-45c3-8ce9-8f540b87e53c	DELETE	/post	undefined
 2023/03/07	23:23:24	2697e850-7ada-4161-8c52-0ad00cf7ea93	POST	/login	undefined
 2023/03/07	23:23:29	705c7421-40e8-449e-9e3b-89690f6d728a	DELETE	/post	undefined
+2023/03/07	23:45:16	1ef6c62f-2448-4b58-9e11-e208181e3515	GET	/	undefined
+2023/03/07	23:45:16	a36c9670-dd59-4186-964b-b3b373411475	GET	/css/style.css	undefined
+2023/03/07	23:45:16	3dff57a0-0746-4279-bba1-b4c89875b5b1	GET	/favicon.ico	undefined
