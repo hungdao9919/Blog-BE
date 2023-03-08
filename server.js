@@ -9,8 +9,7 @@ const cookieParser = require('cookie-parser')
 const connectDB = require('./config/dbConection');
 connectDB();
 
-const HTTPport = process.env.HTTPPORT;
-const HTTPSport = process.env.HTTPSPORT;
+const PORT = process.env.PORT || 3000; 
 
 app.use(logger);
 app.use(cookieParser())
@@ -38,11 +37,9 @@ app.use('*', (req, res) => {
 
 mongoose.connection.once('open', async () => {
     console.log('Connected to MongoDB');
-    app.listen(HTTPport, () => {
-        console.log(`Server listening on port ${HTTPport}`);
+    app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
     });
 
-    app.listen(HTTPSport, () => {
-        console.log(`Server listening on port ${HTTPSport}`);
-    });
+     
 });
