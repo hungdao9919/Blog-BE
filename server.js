@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
 const path = require('path');
+var cors = require('cors')
+
 const { logger } = require('./middleware/logger');
 const cookieParser = require('cookie-parser')
 
@@ -10,14 +12,17 @@ const connectDB = require('./config/dbConection');
 connectDB();
 
 const PORT = process.env.PORT || 3000; 
-
+app.use(cors({credentials: true, origin:true}))
+ 
 app.use(logger);
 app.use(cookieParser())
+
 app.use(express.json());
 app.use('/', express.static(path.join(__dirname, '/public')));
 app.use('/', require('./route/root'));
 app.use('/login', require('./route/api/auth'));
 app.use('/register', require('./route/api/registerUser'));
+app.use('/logout', require('./route/api/logOut')); 
 
 app.use('/refresh', require('./route/api/refresh'));
 app.use('/public-posts', require('./route/api/publicPosts'));
@@ -43,3 +48,6 @@ mongoose.connection.once('open', async () => {
 
      
 });
+
+
+ 
