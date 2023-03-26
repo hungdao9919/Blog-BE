@@ -8,8 +8,7 @@ const handleGetPublicPosts = async (req, res) => {
     let postsResult=[]
     for(var i=0;i < allPost.length;i++){
         const foundUser = await user.findOne({'_id':allPost[i].userid});
-        let username
-        console.log(allPost[i])
+        let username 
         if(!foundUser){
             username = 'removed user'
         }
