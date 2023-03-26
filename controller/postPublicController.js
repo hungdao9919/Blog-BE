@@ -6,7 +6,8 @@ const handleGetPublicPosts = async (req, res) => {
     if(allPost.length===0) return res.status(204).json({"message":"Do not have any posts"})
     
     let postsResult=[]
-    for(var i=0;i < allPost.length;i++){
+    for(var i=0;i < allPost.length;i++){ 
+
         const foundUser = await user.findOne({'_id':allPost[i].userid});
         let username 
         if(!foundUser){
@@ -15,9 +16,8 @@ const handleGetPublicPosts = async (req, res) => {
         else{
             username = foundUser.username
         }
-        postsResult.push({'title':allPost[i].title,'postcontent':allPost[i].postcontent,'datecreated':allPost[i].datecreated,'datemodify':allPost[i].datemodify,'username':username}) 
-    }
-    
+        postsResult.push({'id':allPost[i]._id,'title':allPost[i].title,'postcontent':allPost[i].postcontent,'datecreated':allPost[i].datecreated,'datemodify':allPost[i].datemodify,'username':username}) 
+    } 
     return res.status(200).json(postsResult)
         
         
