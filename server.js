@@ -26,7 +26,7 @@ app.use('/logout', require('./route/api/logOut'));
 
 app.use('/refresh', require('./route/api/refresh'));
 app.use('/public-posts', require('./route/api/publicPosts'));
-app.use('/public-comments', require('./route/api/publicComment'));
+app.use('/public-comments/', require('./route/api/publicComment'));
 
 app.use('/',require('./middleware/verifyJWT'))
 app.use('/admin-comment', require('./route/adminApi/commentsAdmin'));

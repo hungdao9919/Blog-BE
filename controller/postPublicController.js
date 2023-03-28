@@ -12,7 +12,7 @@ const handleGetPublicPosts = async (req, res) => {
         if(!foundUser){
             username = 'removed user'
         }
-        else{
+        else{ 
             username = foundUser.username
         }
         //fix lại format của ngày tháng năm

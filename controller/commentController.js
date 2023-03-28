@@ -5,7 +5,7 @@ const comment = require('../model/comment');
  
 
 
-const handleCreateNewComment = async (req, res) => {
+const handleCreateNewComment = async (req, res) => { 
     //taoj cmt gắn với post
     const {postid, commentcontent } = req.body;
   
