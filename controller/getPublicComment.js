@@ -7,8 +7,7 @@ const handleGetPublicComment = async (req, res) => {
     const allComments = await comment.find({"postid":postid})
     if(allComments.length === 0) return res.status(204).json({"message":"Do not have any posts"})
     let commentResult=[] 
-    for(var i=0;i < allComments.length;i++){ 
-
+    for(var i=0;i < allComments.length;i++){  
         const foundUser = await user.findOne({'_id':allComments[i].userid});
         let username 
         let profileImage
@@ -22,7 +21,7 @@ const handleGetPublicComment = async (req, res) => {
         }
         //fix lại format của ngày tháng năm
         const newModifiDate = `${allComments[i].datemodify.split(" ")[1].split("/")[2]}/${allComments[i].datemodify.split(" ")[1].split("/")[1]}/${allComments[i].datemodify.split(" ")[1].split("/")[0]} ${allComments[i].datemodify.split(" ")[0]}`
-        commentResult.push({'id':allComments[i]._id,'commentcontent':allComments[i].commentcontent,'datecreated':allComments[i].datecreated,'datemodify':newModifiDate,'username':username, 'profileImage':profileImage})  
+        commentResult.push({'id':allComments[i]._id,'commentcontent':allComments[i].commentcontent,'datecreated':allComments[i].datecreated,'datemodify':newModifiDate,'username':username, 'profileImage':profileImage,'userid':allComments[i].userid})  
    
           
         

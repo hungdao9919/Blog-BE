@@ -1,5 +1,6 @@
 const post = require('../model/post');
 const user = require('../model/user');
+const comment = require('../model/comment');
 
  
 
@@ -34,18 +35,18 @@ const handleDeletePost = async (req, res) => {
     
     const { postID } = req.body;
     if(!postID) return res.status(400).json({ "message": 'POST ID is required' });
-
-    if(!req?.roles?.User) return res.sendStatus(401);
+    if(!req?.roles) return res.sendStatus(401); 
     const foundUser = await user.findOne({"username":req.username});
     if(!foundUser) return res.sendStatus(409)
-
+    
     const foundPost = await post.findOne({"_id":postID})
-
- 
-    if(!foundPost) return res.status(409).json({"message": `Can not find post with ID: ${postID}`})
-    if(foundPost.userid===foundUser._id.toString()){
+    
+    
+    if(!foundPost) return res.status(409).json({"message": `Can not find post with ID: ${postID}`}) 
+    if(foundPost.userid===foundUser._id.toString()|| foundUser.roles.Admin){
         const result = await post.deleteOne({"_id":postID}).exec();
-        return res.status(201).json(result)
+        const deleteCommentsResult = await comment.deleteMany({'postid':postID}) 
+        return res.status(204).json(result)
     }
     else{
         return res.sendStatus(401)

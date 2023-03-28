@@ -17,7 +17,7 @@ const handleGetPublicPosts = async (req, res) => {
         }
         //fix lại format của ngày tháng năm
         const newModifiDate = `${allPost[i].datemodify.split(" ")[1].split("/")[2]}/${allPost[i].datemodify.split(" ")[1].split("/")[1]}/${allPost[i].datemodify.split(" ")[1].split("/")[0]} ${allPost[i].datemodify.split(" ")[0]}`
-        postsResult.push({'id':allPost[i]._id,'title':allPost[i].title,'postcontent':allPost[i].postcontent,'datecreated':allPost[i].datecreated,'datemodify':newModifiDate,'username':username})  
+        postsResult.push({'id':allPost[i]._id,'title':allPost[i].title,'postcontent':allPost[i].postcontent,'datecreated':allPost[i].datecreated,'datemodify':newModifiDate,'username':username, 'userid':allPost[i].userid})  
    
           
         

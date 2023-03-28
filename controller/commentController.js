@@ -39,7 +39,7 @@ const handleDeleteComment = async (req, res) => {
     
     if(foundComment.userid===foundUser._id.toString()){
         const result = await comment.deleteOne({"_id":commentID});
-        return res.status(201).json(result)
+        return res.status(204).json(result)
     }
     else{
         return res.sendStatus(401)
