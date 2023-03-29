@@ -34,10 +34,10 @@ const handleDeleteComment = async (req, res) => {
 
     const foundComment = await comment.findOne({"_id":commentID})
 
- 
+  
     if(!foundComment) return res.status(409).json({"message": `Can not find comment with ID: ${commentID}`})
     
-    if(foundComment.userid===foundUser._id.toString()){
+    if(foundComment.userid===foundUser._id.toString()|| foundUser.roles.Admin){
         const result = await comment.deleteOne({"_id":commentID});
         return res.status(204).json(result)
     }
