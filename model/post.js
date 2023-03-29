@@ -18,6 +18,6 @@ const schema = new mongoose.Schema({
     },
     url: String,
     userid: String,
-});
+},{ timestamps: true });
 const post = mongoose.model('post', schema);
 module.exports = post;

@@ -30,6 +30,6 @@ const mongoose = require('mongoose');
         type:String,
         default:new Date().toLocaleString("vi-VN")
     },
-});
+},{ timestamps: true });
 const user = mongoose.model('user', schema);
 module.exports = user;
