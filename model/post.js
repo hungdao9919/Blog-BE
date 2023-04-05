@@ -8,14 +8,6 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    datecreated: {
-        type:String,
-        default:new Date().toLocaleString("vi-VN")
-    },
-    datemodify: {
-        type:String,
-        default:new Date().toLocaleString("vi-VN")
-    },
     url: String,
     userid: String,
 },{ timestamps: true });

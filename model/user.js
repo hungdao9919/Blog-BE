@@ -26,10 +26,6 @@ const mongoose = require('mongoose');
     email: String,
     firstname: String,
     lastname: String,
-    joindate: {
-        type:String,
-        default:new Date().toLocaleString("vi-VN")
-    },
 },{ timestamps: true });
 const user = mongoose.model('user', schema);
 module.exports = user;
