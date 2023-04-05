@@ -3,7 +3,6 @@ const router = express.Router();
 const handleGetPublicPosts = require('../../controller/postPublicController');
 
  
-router.get('/', handleGetPublicPosts);
- 
+router.get('/:pageNo', handleGetPublicPosts); 
 
 module.exports = router;

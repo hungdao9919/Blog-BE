@@ -2,7 +2,12 @@ const post = require('../model/post');
 const user = require('../model/user');
  
 const handleGetPublicPosts = async (req, res) => {
-    const allPost = await post.find({}).limit(999).sort('-createdAt')
+    const limit = 8;
+    const pageNo = req.params.pageNo;   
+    const skip = (pageNo -1)*limit 
+    const allPost = await post.find({}).limit(limit).skip(skip).sort('-createdAt')
+    const totalCount = await post.count({})
+    const totalPage = Math.ceil(totalCount/limit) 
     if(allPost.length===0) return res.status(204).json({"message":"Do not have any posts"})  
     let postsResult=[] 
     for(var i=0;i < allPost.length;i++){ 
@@ -23,7 +28,7 @@ const handleGetPublicPosts = async (req, res) => {
           
         
     }      
-    return res.status(200).json(postsResult)
+    return res.status(200).json({postsResult,totalPage,pageNo})
         
         
         
