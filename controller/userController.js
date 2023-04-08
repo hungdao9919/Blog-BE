@@ -5,12 +5,12 @@ require('dotenv').config();
 
  
 
- 
 const handleGetUser = async (req, res) => {
     const foundUser = await user.findOne({"username":req.username});
     if(!foundUser) return res.sendStatus(409)
     res.status(200).json(foundUser)
  }
+
 const handleUpdateUser = async (req, res) => {
     const { password, email, lastname, firstname, profileImage } = req.body;
     if(!password &&!email &&!lastname &&!firstname &&!profileImage) return res.sendStatus(409)
