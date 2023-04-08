@@ -6,19 +6,27 @@ require('dotenv').config();
  
 
 const handleGetUser = async (req, res) => {
-    const foundUser = await user.findOne({"username":req.username});
+    const foundUser = await user.findOne({"username":req.username},'username profileImage email lastname firstname createdAt updatedAt roles');
     if(!foundUser) return res.sendStatus(409)
     res.status(200).json(foundUser)
  }
 
 const handleUpdateUser = async (req, res) => {
-    const { password, email, lastname, firstname, profileImage } = req.body;
+    const { password, email, lastname, firstname, profileImage, oldPassword } = req.body;
     if(!password &&!email &&!lastname &&!firstname &&!profileImage) return res.sendStatus(409)
      
     const foundUser = await user.findOne({"username":req.username});
     if(!foundUser) return res.sendStatus(409)
     if(password){
-        foundUser.password=await bcrypt.hash(password, 10);
+        const comparePassword = await bcrypt.compare(oldPassword,foundUser.password);
+        if(comparePassword){ 
+            foundUser.password=await bcrypt.hash(password, 10);
+        }
+        else{
+            return res.sendStatus(409)
+        }
+        
+
     }
     if(email){
         foundUser.email=email
