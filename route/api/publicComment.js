@@ -3,7 +3,7 @@ const router = express.Router();
 const handleGetPublicComment = require('../../controller/getPublicComment');
 
  
-router.get('/:id', handleGetPublicComment);
+router.get('/', handleGetPublicComment);
  
 
 module.exports = router;
