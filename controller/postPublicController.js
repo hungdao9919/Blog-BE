@@ -2,7 +2,7 @@ const post = require('../model/post');
 const user = require('../model/user');
  
 const handleGetPublicPosts = async (req, res) => {
-    const limit = 8;
+    const limit = 12;
     const {pageNo,userId,postId} = req.query;      
     let  skip
     if(pageNo<=0){
