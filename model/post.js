@@ -8,6 +8,11 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    postimage: {
+        type: String,
+        required: true,
+        default: "https://res.cloudinary.com/dr9qxrwxx/image/upload/v1681724429/10_yylgmn.png"
+    },
     url: String,
     userid: String,
 },{ timestamps: true });
