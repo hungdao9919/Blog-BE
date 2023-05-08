@@ -28,6 +28,7 @@ app.use('/refresh', require('./route/api/refresh'));
 app.use('/public-posts', require('./route/api/publicPosts'));
 app.use('/public-comments/', require('./route/api/publicComment'));
 app.use('/userinfo/', require('./route/api/userInfo'));
+app.use('/search', require('./route/api/search'));
 
 app.use('/',require('./middleware/verifyJWT'))
 app.use('/admin-comment', require('./route/adminApi/commentsAdmin'));
