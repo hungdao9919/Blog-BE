@@ -16,5 +16,6 @@ const schema = new mongoose.Schema({
     url: String,
     userid: String,
 },{ timestamps: true });
+schema.index({title: 'text', postcontent: 'text'});
 const post = mongoose.model('post', schema);
 module.exports = post;

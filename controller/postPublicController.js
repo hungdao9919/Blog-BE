@@ -3,7 +3,8 @@ const user = require('../model/user');
  
 const handleGetPublicPosts = async (req, res) => {
     const limit = 12;
-    const {pageNo,userId,postId} = req.query;      
+    const {pageNo,userId,postId} = req.query;    
+    console.log(pageNo)  
     let  skip
     if(pageNo<=0){
         skip = 0
@@ -45,7 +46,7 @@ const handleGetPublicPosts = async (req, res) => {
           
         
     }       
-    
+    console.log(totalPage,pageNo)
     return res.status(200).json({postsResult,totalPage,pageNo})
         
         
