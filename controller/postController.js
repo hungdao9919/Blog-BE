@@ -14,23 +14,7 @@ const handleCreateNewPost = async (req, res) => {
     const result = await post.create({"title":title,"postcontent":postcontent,userid:foundUser._id,"postimage":postimage});
     res.status(201).json(result)
 };
-const handleGetPost = async (req, res) => {
-    
-    if(!req.roles) return res.sendStatus(401);
-    const foundUser = await user.findOne({"username":req.username});
-    if(!foundUser) return res.sendStatus(409)
-
-    if(foundUser.roles.Admin){
-        const allPost = await post.find({})
-        res.status(200).json(allPost)
-    }
-    else{
-        const postOfUser = await post.find({"userid":foundUser._id})
-        res.status(200).json(postOfUser) 
-    } 
-
-    
-};
+ 
 const handleDeletePost = async (req, res) => {
     
     const { postID } = req.body;
@@ -86,4 +70,4 @@ const handleUpdatePost = async (req, res) => {
 
      
 };
-module.exports = { handleCreateNewPost, handleGetPost, handleDeletePost, handleUpdatePost};
+module.exports = { handleCreateNewPost, handleDeletePost, handleUpdatePost};
