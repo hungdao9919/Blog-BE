@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
     profileImage: {
         type: String,
         required: true,
-        default: "../img/here-image-pcngon-3.jpg"
+        default: "https://res.cloudinary.com/dr9qxrwxx/image/upload/v1684597709/images_vqkeyr.png"
     },
     refreshToken: String,
     roles: {

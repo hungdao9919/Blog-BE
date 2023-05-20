@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     postimage: {
         type: String,
         required: true,
-        default: "https://res.cloudinary.com/dr9qxrwxx/image/upload/v1681724429/10_yylgmn.png"
+        default: "https://res.cloudinary.com/dr9qxrwxx/image/upload/v1684598080/Untitled-design-50_uhle3q.png"
     },
     url: String,
     userid: String,
